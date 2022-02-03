@@ -1,0 +1,53 @@
+version: '3.4'
+
+services:
+  documentmono.api:
+    image: ${DOCKER_REGISTRY-}documentmonoapi
+    build:
+      context: .
+      dockerfile: DocumentMono.API/Dockerfile
+
+  elasticsearch:
+    container_name: els
+    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+    volumes:
+      - elasticsearchdata:/usr/share/elasticsearch/data
+    ports:
+      - ${ES_PORT}:9200
+    environment:
+      - discovery.type=single-node
+      - xpack.monitoring.enabled=true
+      - xpack.watcher.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    mem_limit: ${MEM_LIMIT}
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+     - elsnetwork
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:${STACK_VERSION}
+    depends_on:
+      - elasticsearch
+    volumes:
+      - kibanadata:/usr/share/kibana/data
+    ports:
+      - ${KIBANA_PORT}:5601
+    environment:
+      - ELASTICSEARCH_URL=http://localhost:9200
+    mem_limit: ${MEM_LIMIT}
+    networks:
+     - elsnetwork
+
+networks:
+    elsnetwork:
+        driver: bridge
+
+volumes:
+  elasticsearchdata:
+    driver: local
+  kibanadata:
+    driver: local
