@@ -28,5 +28,5 @@ public class CitizenDto : BaseDto
     /// <summary>
     /// Birth of date / Doğum tarihi
     /// </summary>
-    public DateOnly BirthDate { get; set; }
+    public DateTime BirthDate { get; set; }
 }

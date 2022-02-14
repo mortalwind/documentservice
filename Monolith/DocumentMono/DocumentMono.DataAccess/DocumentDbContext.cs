@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using MySql.EntityFrameworkCore.Extensions;
 
 namespace DocumentMono.DataAccess
 {
     public class DocumentDbContext: DbContext
     {
+
         public DbSet<User> Users { get; set; }
         public DbSet<CivilServant> CivilServants { get; set; }
         public DbSet<Citizen> Citizens { get; set; }
@@ -13,7 +15,7 @@ namespace DocumentMono.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;database=library;user=user;password=password");
+            optionsBuilder.UseMySQL("server=localhost;database=library;user=root;password=31Ocak1983");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

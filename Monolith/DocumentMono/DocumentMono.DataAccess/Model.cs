@@ -92,7 +92,7 @@ namespace DocumentMono.DataAccess
         /// <summary>
         /// Birth of date / Doğum tarihi
         /// </summary>
-        public DateOnly BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
 
         public virtual ICollection<Document> Documents { get; set; }
     }

@@ -9,7 +9,7 @@ namespace DocumentMono.Business.ElasticSearch;
 
 public static class ElasticSearchService
 {
-    private readonly ElasticClient client = new ElasticClient();
+    //private readonly ElasticClient client = new ElasticClient();
 
 
 }

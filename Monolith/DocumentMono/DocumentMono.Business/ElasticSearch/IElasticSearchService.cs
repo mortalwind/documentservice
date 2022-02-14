@@ -8,5 +8,5 @@ namespace DocumentMono.Business.ElasticSearch;
 
 public interface IElasticSearchService
 {
-    Task CreateIndexAsync<T, TKey>(string indexName) where T: ElasticEntity
+    Task CreateIndexAsync<T, TKey>(string indexName) where T : class;
 }
